@@ -1,0 +1,2 @@
+python == 3.x
+gitpython == 2.1.10
