@@ -12,7 +12,7 @@
 #
 # Please maintain this if you use this script or any part of it
 
-import git
+from git import *
 import os
 
 logo = """ ______   ______     ______     ______        ______     __         ______     __   __     ______     ______   
@@ -58,19 +58,19 @@ chimera_treble = "https://github.com/rupansh/chimera_treble"
 dtc_7 = "https://github.com/USA-RedDragon/prebuilts_clang_host_linux-x86_7.0-DragonTC"
 ak2 = "https://github.com/rupansh/AnyKernel2"
 
-trees = [(t_device, device, b), (t_vendor, vendor, b), (t_kernel, kernel, b)]
-
 chimera = [(chimera_nich, c_dir, bc), (chimera_treble, ct_dir, bc), (dtc_7, dtc_dir, dc), (ak2, ak2_dir, ak2br)]
 
-ask = input("What are you cloning today?(trees/chimera")
+ask = input("What are you cloning today?(trees/chimera) ")
 if ask == "trees":
-    ask2 = input("Whose trees do you want to clone?(reloaded/hyper")
+    ask2 = input("Whose trees do you want to clone?(reloaded/hyper) ")
     if ask2 == "reloaded":
         print("Note:- TeamReloaded Trees are treble and only oreo trees are available!")
         t_device = "https://github.com/TeamReloaded/android_device_xiaomi_land"
         t_vendor = "https://github.com/TeamReloaded/proprietary_vendor_xiaomi"
         t_kernel = "https://github.com/TeamReloaded/android_kernel_xiaomi_msm8937"
         b = "lineage-15.1"
+        bv = "lineage-15.1-land"
+        trees = [(t_device, device, b), (t_vendor, vendor, bv), (t_kernel, kernel, b)]
         for i in trees:
             tree(*i)
         print("TeamReloaded trees cloned!")
@@ -80,16 +80,17 @@ if ask == "trees":
         t_common = "https://github.com/HyperTeam/android_kernel_xiaomi_msm8937"
         t_vendor = "https://github.com/HyperTeam/proprietary_vendor_xiaomi.git"
         t_kernel = "https://github.com/HyperTeam/android_kernel_xiaomi_msm8937"
-        trees.append((t_common, common, b))
-        ask3 = input("Which android version?(N/O")
+        ask3 = input("Which android version?(N/O) ")
         if ask3 == "N":
             b = "cm-14.1"
+            trees = [(t_device, device, b), (t_vendor, vendor, b), (t_kernel, kernel, b), (t_common, common, b)]
             for i in trees:
                 tree(*i)
             print("HyperTeam N trees cloned")
             os.system("rm -rf vendor/xiaomi/santoni")
         if ask3 == "O":
             b = "lineage-15.1"
+            trees = [(t_device, device, b), (t_vendor, vendor, b), (t_kernel, kernel, b), (t_common, common, b)]
             for i in trees:
                 tree(*i)
             print("HyperTeam O trees cloned")
@@ -101,9 +102,9 @@ if ask == "trees":
         print("Wrong input! Enter the correct team name!")
 
 if ask == "chimera":
-    c_ask = input("Which source are we cloning?(treble/normal/both")
+    c_ask = input("Which source are we cloning?(treble/normal/both) ")
     if c_ask == "treble":
-        c_ask2 = input("Are we cloning the required repos?(ie. Toolchain, Anykernel2) y/n")
+        c_ask2 = input("Are we cloning the required repos?(ie. Toolchain, Anykernel2) y/n ")
         if c_ask2 == "y":
             del chimera[0]
             for i in chimera:
@@ -116,7 +117,7 @@ if ask == "chimera":
             print("Wrong input! Enter it correctly!")
 
     elif c_ask == "normal":
-        c_ask2 = input("Are we cloning the required repos?(ie. Toolchain, Anykernel2) y/n")
+        c_ask2 = input("Are we cloning the required repos?(ie. Toolchain, Anykernel2) y/n ")
         if c_ask2 == "y":
             del chimera[1]
             for i in chimera:
@@ -129,7 +130,7 @@ if ask == "chimera":
             print("Wrong input! Enter it correctly!")
 
     elif c_ask == "both":
-        c_ask2 = input("Are we cloning the required repos?(ie. Toolchain, Anykernel2) y/n")
+        c_ask2 = input("Are we cloning the required repos?(ie. Toolchain, Anykernel2) y/n ")
         if c_ask2 == "y":
             for i in chimera:
                 tree(*i)
