@@ -101,7 +101,7 @@ if ask == "trees":
     else:
         print("Wrong input! Enter the correct team name!")
 
-if ask == "chimera":
+elif ask == "chimera":
     c_ask = input("Which source are we cloning?(treble/normal/both) ")
     if c_ask == "treble":
         c_ask2 = input("Are we cloning the required repos?(ie. Toolchain, Anykernel2) y/n ")
