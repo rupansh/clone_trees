@@ -58,7 +58,7 @@ chimera_nich = "https://github.com/rupansh/chimera_nich"
 chimera_treble = "https://github.com/rupansh/chimera_treble"
 dtc_7 = "https://github.com/USA-RedDragon/prebuilts_clang_host_linux-x86_7.0-DragonTC"
 ak2 = "https://github.com/rupansh/AnyKernel2"
-ubertc = "https://bitbucket.org/UBERTC/aarch64-linux-android-4.9-kernel.git'
+ubertc = "https://bitbucket.org/UBERTC/aarch64-linux-android-4.9-kernel.git"
 
 chimera = [(chimera_nich, c_dir, bc), (chimera_treble, ct_dir, bc), (dtc_7, dtc_dir, dc), (ak2, ak2_dir, ak2br), (ubertc, utc_dir, dc)]
 
