@@ -48,6 +48,7 @@ c_dir = "chimera_nich"
 ct_dir = "chimera_treble"
 dtc_dir = "dragontc-7.0"
 ak2_dir = "AnyKernel2"
+utc_dir = "aarch64-linux-android-4.9-kernel"
 
 bc = "lineage-15.1"
 dc = "master"
@@ -57,8 +58,9 @@ chimera_nich = "https://github.com/rupansh/chimera_nich"
 chimera_treble = "https://github.com/rupansh/chimera_treble"
 dtc_7 = "https://github.com/USA-RedDragon/prebuilts_clang_host_linux-x86_7.0-DragonTC"
 ak2 = "https://github.com/rupansh/AnyKernel2"
+ubertc = "https://bitbucket.org/UBERTC/aarch64-linux-android-4.9-kernel.git'
 
-chimera = [(chimera_nich, c_dir, bc), (chimera_treble, ct_dir, bc), (dtc_7, dtc_dir, dc), (ak2, ak2_dir, ak2br)]
+chimera = [(chimera_nich, c_dir, bc), (chimera_treble, ct_dir, bc), (dtc_7, dtc_dir, dc), (ak2, ak2_dir, ak2br), (ubertc, utc_dir, dc)]
 
 ask = input("What are you cloning today?(trees/chimera) ")
 if ask == "trees":
@@ -103,42 +105,40 @@ if ask == "trees":
 
 elif ask == "chimera":
     c_ask = input("Which source are we cloning?(treble/normal/both) ")
+    c_ask2 = input("Are we cloning the required repos?(ie. Toolchains, Anykernel2) y/n ")
     if c_ask == "treble":
-        c_ask2 = input("Are we cloning the required repos?(ie. Toolchain, Anykernel2) y/n ")
         if c_ask2 == "y":
             del chimera[0]
             for i in chimera:
                 tree(*i)
-            print("Treble source cloned with ak2 and dtc-7.0")
+            print("Treble source cloned with ak2 and toolchains")
         elif c_ask2 == "n":
             tree(*chimera[1])
-            print("Treble source cloned without ak2 and dtc-7.0")
+            print("Treble source cloned without ak2 and toolchains")
         else:
             print("Wrong input! Enter it correctly!")
 
     elif c_ask == "normal":
-        c_ask2 = input("Are we cloning the required repos?(ie. Toolchain, Anykernel2) y/n ")
         if c_ask2 == "y":
             del chimera[1]
             for i in chimera:
                 tree(*i)
-            print("Non-treble source cloned with ak2 and dtc-7.0")
+            print("Non-treble source cloned with ak2 and toolchains")
         elif c_ask2 == "n":
             tree(*chimera[0])
-            print("non-treble source cloned without ak2 and dtc-7.0")
+            print("non-treble source cloned without ak2 and toolchains")
         else:
             print("Wrong input! Enter it correctly!")
 
     elif c_ask == "both":
-        c_ask2 = input("Are we cloning the required repos?(ie. Toolchain, Anykernel2) y/n ")
         if c_ask2 == "y":
             for i in chimera:
                 tree(*i)
-            print("both sources cloned with ak2 and dtc-7.0")
+            print("both sources cloned with ak2 and toolchains")
         elif c_ask2 == "n":
             tree(*chimera[0])
             tree(*chimera[1])
-            print("both sources cloned without ak2 and dtc-7.0")
+            print("both sources cloned without ak2 and toolchains")
         else:
             print("Wrong input! Enter it correctly!")
 
