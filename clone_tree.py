@@ -25,7 +25,7 @@ Tip- Run this from your ROM's source dir if you are cloning dt,kernel and vendor
 ~Brought to you by RUPANSHKEK
 ~GPL V2
 ~Made with love""")
-print(logo
+print(logo)
 
 
 def tree(link, directory, br):
