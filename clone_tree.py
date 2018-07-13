@@ -15,17 +15,17 @@
 from git import *
 import os
 
-logo = """ ______   ______     ______     ______        ______     __         ______     __   __     ______     ______   
+logo = str(""" ______   ______     ______     ______        ______     __         ______     __   __     ______     ______   
 /\__  _\ /\  == \   /\  ___\   /\  ___\      /\  ___\   /\ \       /\  __ \   /\ "-.\ \   /\  ___\   /\  == \  
 \/_/\ \/ \ \  __<   \ \  __\   \ \  __\      \ \ \____  \ \ \____  \ \ \/\ \  \ \ \-.  \  \ \  __\   \ \  __<  
-   \ \_\  \ \_\ \_\  \ \_____\  \ \_____\     \ \_____\  \ \_____\  \ \_____\  \ \_\\"\_\  \ \_____\  \ \_\ \_\
+   \ \_\  \ \_\ \_\  \ \_____\  \ \_____\     \ \_____\  \ \_____\  \ \_____\  \ \_\\\\"\_\  \ \_____\  \ \_\ \\ \\
     \/_/   \/_/ /_/   \/_____/   \/_____/      \/_____/   \/_____/   \/_____/   \/_/ \/_/   \/_____/   \/_/ /_/
 Note- This script is only for Redmi 3s(ie. land)
 Tip- Run this from your ROM's source dir if you are cloning dt,kernel and vendor
 ~Brought to you by RUPANSHKEK
 ~GPL V2
-~Made with love"""
-print(logo)
+~Made with love""")
+print(logo
 
 
 def tree(link, directory, br):
