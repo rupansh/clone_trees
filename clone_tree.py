@@ -60,39 +60,48 @@ dtc_7 = "https://github.com/USA-RedDragon/prebuilts_clang_host_linux-x86_7.0-Dra
 ak2 = "https://github.com/rupansh/AnyKernel2"
 ubertc = "https://bitbucket.org/UBERTC/aarch64-linux-android-4.9-kernel.git"
 
+t_device = ""
+b = ""
+t_vendor = ""
+bv = ""
+t_kernel = ""
+
 chimera = [(chimera_nich, c_dir, bc), (chimera_treble, ct_dir, bc), (dtc_7, dtc_dir, dc), (ak2, ak2_dir, ak2br), (ubertc, utc_dir, dc)]
+devices = [t_device, device, b]
+vendors = [t_vendor, vendor, devices[2]]
+kernels = [t_kernel, kernel, devices[2]]
+trees = [devices, vendors, kernels]
 
 ask = input("What are you cloning today?(trees/chimera) ")
 if ask == "trees":
     ask2 = input("Whose trees do you want to clone?(reloaded/hyper) ")
     if ask2 == "reloaded":
         print("Note:- TeamReloaded Trees are treble and only oreo trees are available!")
-        t_device = "https://github.com/TeamReloaded/android_device_xiaomi_land"
-        t_vendor = "https://github.com/TeamReloaded/proprietary_vendor_xiaomi"
-        t_kernel = "https://github.com/TeamReloaded/android_kernel_xiaomi_msm8937"
-        b = "lineage-15.1"
-        bv = "lineage-15.1-land"
-        trees = [(t_device, device, b), (t_vendor, vendor, bv), (t_kernel, kernel, b)]
+        devices[0] = "https://github.com/TeamReloaded/android_device_xiaomi_land"
+        vendors[0] = "https://github.com/TeamReloaded/proprietary_vendor_xiaomi"
+        kernels[0] = "https://github.com/TeamReloaded/android_kernel_xiaomi_msm8937"
+        devices[2] = "lineage-15.1"
+        vendors[2] = "lineage-15.1-land"
         for i in trees:
             tree(*i)
         print("TeamReloaded trees cloned!")
 
     elif ask2 == "hyper":
-        t_device = "https://github.com/HyperTeam/android_device_xiaomi_land"
+        devices[0] = "https://github.com/HyperTeam/android_device_xiaomi_land"
         t_common = "https://github.com/HyperTeam/android_kernel_xiaomi_msm8937"
-        t_vendor = "https://github.com/HyperTeam/proprietary_vendor_xiaomi.git"
-        t_kernel = "https://github.com/HyperTeam/android_kernel_xiaomi_msm8937"
+        vendors[0] = "https://github.com/HyperTeam/proprietary_vendor_xiaomi.git"
+        kernels[0] = "https://github.com/HyperTeam/android_kernel_xiaomi_msm8937"
         ask3 = input("Which android version?(N/O) ")
         if ask3 == "N":
-            b = "cm-14.1"
-            trees = [(t_device, device, b), (t_vendor, vendor, b), (t_kernel, kernel, b), (t_common, common, b)]
+            devices[2] = "cm-14.1"
+            trees.append((t_common, common, devices[2]))
             for i in trees:
                 tree(*i)
             print("HyperTeam N trees cloned")
             os.system("rm -rf vendor/xiaomi/santoni")
         if ask3 == "O":
-            b = "lineage-15.1"
-            trees = [(t_device, device, b), (t_vendor, vendor, b), (t_kernel, kernel, b), (t_common, common, b)]
+            devices[2] = "lineage-15.1"
+            trees.append((t_common, common, b))
             for i in trees:
                 tree(*i)
             print("HyperTeam O trees cloned")
