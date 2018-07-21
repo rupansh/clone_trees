@@ -60,16 +60,10 @@ dtc_7 = "https://github.com/USA-RedDragon/prebuilts_clang_host_linux-x86_7.0-Dra
 ak2 = "https://github.com/rupansh/AnyKernel2"
 ubertc = "https://bitbucket.org/UBERTC/aarch64-linux-android-4.9-kernel.git"
 
-t_device = ""
-b = ""
-t_vendor = ""
-bv = ""
-t_kernel = ""
-
 chimera = [(chimera_nich, c_dir, bc), (chimera_treble, ct_dir, bc), (dtc_7, dtc_dir, dc), (ak2, ak2_dir, ak2br), (ubertc, utc_dir, dc)]
-devices = [t_device, device, b]
-vendors = [t_vendor, vendor, devices[2]]
-kernels = [t_kernel, kernel, devices[2]]
+devices = [1, device, 3]
+vendors = [1, vendor, 3]
+kernels = [1, kernel, 3]
 trees = [devices, vendors, kernels]
 
 ask = input("What are you cloning today?(trees/chimera) ")
@@ -82,6 +76,7 @@ if ask == "trees":
         kernels[0] = "https://github.com/TeamReloaded/android_kernel_xiaomi_msm8937"
         devices[2] = "lineage-15.1"
         vendors[2] = "lineage-15.1-land"
+        kernels[2] = "lineage-15.1"
         for i in trees:
             tree(*i)
         print("TeamReloaded trees cloned!")
@@ -94,6 +89,8 @@ if ask == "trees":
         ask3 = input("Which android version?(N/O) ")
         if ask3 == "N":
             devices[2] = "cm-14.1"
+            vendors[2] = devices[2]
+            kernels[2] = devices[2]
             trees.append((t_common, common, devices[2]))
             for i in trees:
                 tree(*i)
@@ -101,7 +98,9 @@ if ask == "trees":
             os.system("rm -rf vendor/xiaomi/santoni")
         if ask3 == "O":
             devices[2] = "lineage-15.1"
-            trees.append((t_common, common, b))
+            vendors[2] = devices[2]
+            kernels[2] = devices[2]
+            trees.append((t_common, common, devices[2]))
             for i in trees:
                 tree(*i)
             print("HyperTeam O trees cloned")
