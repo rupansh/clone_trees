@@ -73,10 +73,16 @@ if ask == "trees":
         print("Note:- TeamReloaded Trees are treble and only oreo trees are available!")
         devices[0] = "https://github.com/TeamReloaded/android_device_xiaomi_land"
         vendors[0] = "https://github.com/TeamReloaded/proprietary_vendor_xiaomi"
-        kernels[0] = "https://github.com/TeamReloaded/android_kernel_xiaomi_msm8937"
+        kernels[0] = "https://github.com/RiteshSaxena/android_kernel_xiaomi_msm8937"
         devices[2] = "lineage-15.1"
         vendors[2] = "lineage-15.1-land"
-        kernels[2] = "lineage-15.1"
+        askkern = input("Use EAS kernel? y/n ")
+        if askkern == "y":
+            kernels[2] = "EAS"
+        elif askkern == "n":
+            kernels[2] = "lineage-15.1"
+        else:
+            print("Wrong input nibba make the correct choice")
         for i in trees:
             tree(*i)
         print("TeamReloaded trees cloned!")
