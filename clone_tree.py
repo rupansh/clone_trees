@@ -46,7 +46,7 @@ common = "device/xiaomi/msm8937-common"
 
 c_dir = "chimera_nich"
 ct_dir = "chimera_treble"
-dtc_dir = "dragontc-7.0"
+dtc_dir = "dtc-7.0"
 ak2_dir = "AnyKernel2"
 utc_dir = "aarch64-linux-android-4.9-kernel"
 
@@ -56,7 +56,7 @@ ak2br = "land"
 
 chimera_nich = "https://github.com/rupansh/chimera_nich"
 chimera_treble = "https://github.com/rupansh/chimera_treble"
-dtc_7 = "https://github.com/USA-RedDragon/prebuilts_clang_host_linux-x86_7.0-DragonTC"
+dtc_7 = "https://github.com/rupansh/dtc-7.0"
 ak2 = "https://github.com/rupansh/AnyKernel2"
 ubertc = "https://bitbucket.org/UBERTC/aarch64-linux-android-4.9-kernel.git"
 
