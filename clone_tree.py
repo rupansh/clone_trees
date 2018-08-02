@@ -96,7 +96,7 @@ if ask == "trees":
                 tree(*i)
             print("HyperTeam N trees cloned")
             os.system("rm -rf vendor/xiaomi/santoni")
-        if ask3 == "O":
+        elif ask3 == "O":
             devices[2] = "lineage-15.1"
             vendors[2] = devices[2]
             kernels[2] = devices[2]
