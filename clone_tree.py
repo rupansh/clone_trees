@@ -78,8 +78,10 @@ if ask == "trees":
         vendors[2] = "lineage-15.1-land"
         askkern = input("Use EAS kernel? y/n ")
         if askkern == "y":
+            print("using EAS kernel kek")
             kernels[2] = "EAS"
         elif askkern == "n":
+            print("Using non EAS kernel(why tho)")
             kernels[2] = "lineage-15.1"
         else:
             print("Wrong input nibba make the correct choice")
