@@ -44,23 +44,22 @@ vendor = "vendor/xiaomi"
 kernel = "kernel/xiaomi/msm8937"
 common = "device/xiaomi/msm8937-common"
 
-c_dir = "chimera_nich"
-ct_dir = "chimera_treble"
-dtc_dir = "dtc-7.0"
+c_dir = "chimera"
+dtc_dir = "dtc-8.0"
 ak2_dir = "AnyKernel2"
-utc_dir = "aarch64-linux-android-4.9-kernel"
+linaro_dir = "aarch64-linux-gnu"
 
-bc = "lineage-15.1"
-dc = "master"
+bc = "lineage-16.0"
+dc = "dtc-8.0-140918"
 ak2br = "land"
+linbr = "linaro-7-14092018"
 
-chimera_nich = "https://github.com/rupansh/chimera_nich"
-chimera_treble = "https://github.com/rupansh/chimera_treble"
-dtc_7 = "https://github.com/rupansh/dtc-7.0"
-ak2 = "https://github.com/rupansh/AnyKernel2"
-ubertc = "https://bitbucket.org/UBERTC/aarch64-linux-android-4.9-kernel.git"
+chimera = "https://github.com/ChimeraKernelProject/chimera_land-current"
+dtc_8 = "https://github.com/ChimeraKernelProject/dragontc-8.0"
+ak2 = "https://github.com/ChimeraKernelProject/AnyKernel2"
+linaro = "https://bitbucket.org/rupanshji/aarch64-linux-gnu.git"
 
-chimera = [(chimera_nich, c_dir, bc), (chimera_treble, ct_dir, bc), (dtc_7, dtc_dir, dc), (ak2, ak2_dir, ak2br), (ubertc, utc_dir, dc)]
+chimera = [(chimera, c_dir, bc), (dtc_8, dtc_dir, dc), (ak2, ak2_dir, ak2br), (linaro, linaro_dir, linbr)]
 devices = [1, device, 3]
 vendors = [1, vendor, 3]
 kernels = [1, kernel, 3]
@@ -68,26 +67,26 @@ trees = [devices, vendors, kernels]
 
 ask = input("What are you cloning today?(trees/chimera) ")
 if ask == "trees":
-    ask2 = input("Whose trees do you want to clone?(reloaded/hyper) ")
-    if ask2 == "reloaded":
-        print("Note:- TeamReloaded Trees are treble and only oreo trees are available!")
-        devices[0] = "https://github.com/TeamReloaded/android_device_xiaomi_land"
-        vendors[0] = "https://github.com/TeamReloaded/proprietary_vendor_xiaomi"
+    ask2 = input("Whose trees do you want to clone?(ritesh/hyper) ")
+    if ask2 == "ritesh":
+        print("Note:- RiteshSaxena's Trees are treble")
+        devices[0] = "https://github.com/RiteshSaxena/android_device_xiaomi_land"
+        vendors[0] = "https://github.com/RiteshSaxena/proprietary_vendor_xiaomi"
         kernels[0] = "https://github.com/RiteshSaxena/android_kernel_xiaomi_msm8937"
-        devices[2] = "lineage-15.1"
-        vendors[2] = "lineage-15.1-land"
-        askkern = input("Use EAS kernel? y/n ")
-        if askkern == "y":
-            print("using EAS kernel kek")
-            kernels[2] = "EAS"
-        elif askkern == "n":
-            print("Using non EAS kernel(why tho)")
+        verask = input("Which Android version?(O/P) ")
+        if verask == "O":
+            devices[2] = "lineage-15.1"
+            vendors[2] = "lineage-15.1-land"
             kernels[2] = "lineage-15.1"
+        elif verask == "P":
+            devices[2] = "lineage-16.0"
+            vendors[2] = "lineage-16.0-land"
+            kernels[2] = "lineage-16.0"
         else:
-            print("Wrong input nibba make the correct choice")
+            print("Incorrect Android Version! Enter O or P")
         for i in trees:
             tree(*i)
-        print("TeamReloaded trees cloned!")
+        print("RiteshSaxena's {} Trees Cloned".format(verask))
 
     elif ask2 == "hyper":
         devices[0] = "https://github.com/HyperTeam/android_device_xiaomi_land"
@@ -100,66 +99,32 @@ if ask == "trees":
             vendors[2] = devices[2]
             kernels[2] = devices[2]
             trees.append((t_common, common, devices[2]))
-            for i in trees:
-                tree(*i)
-            print("HyperTeam N trees cloned")
-            os.system("rm -rf vendor/xiaomi/santoni")
         elif ask3 == "O":
             devices[2] = "lineage-15.1"
             vendors[2] = devices[2]
             kernels[2] = devices[2]
             trees.append((t_common, common, devices[2]))
-            for i in trees:
-                tree(*i)
-            print("HyperTeam O trees cloned")
-            os.system("rm -rf vendor/xiaomi/santoni")
         else:
             print("Wrong input! Please enter the correct version")
+        for i in trees:
+            tree(*i)
+        print("HyperTeam {} trees cloned".format(ask3))
+        os.system("rm -rf vendor/xiaomi/santoni")
 
     else:
         print("Wrong input! Enter the correct team name!")
 
 elif ask == "chimera":
-    c_ask = input("Which source are we cloning?(treble/normal/both) ")
-    c_ask2 = input("Are we cloning the required repos?(ie. Toolchains, Anykernel2) y/n ")
-    if c_ask == "treble":
-        if c_ask2 == "y":
-            del chimera[0]
-            for i in chimera:
-                tree(*i)
-            print("Treble source cloned with ak2 and toolchains")
-        elif c_ask2 == "n":
-            tree(*chimera[1])
-            print("Treble source cloned without ak2 and toolchains")
-        else:
-            print("Wrong input! Enter it correctly!")
-
-    elif c_ask == "normal":
-        if c_ask2 == "y":
-            del chimera[1]
-            for i in chimera:
-                tree(*i)
-            print("Non-treble source cloned with ak2 and toolchains")
-        elif c_ask2 == "n":
-            tree(*chimera[0])
-            print("non-treble source cloned without ak2 and toolchains")
-        else:
-            print("Wrong input! Enter it correctly!")
-
-    elif c_ask == "both":
-        if c_ask2 == "y":
-            for i in chimera:
-                tree(*i)
-            print("both sources cloned with ak2 and toolchains")
-        elif c_ask2 == "n":
-            tree(*chimera[0])
-            tree(*chimera[1])
-            print("both sources cloned without ak2 and toolchains")
-        else:
-            print("Wrong input! Enter it correctly!")
-
+    c_ask = input("Are we cloning the required tools?(ie. Toolchains, Anykernel2) y/n ")
+    if c_ask == "y":
+        for i in chimera:
+            tree(*i)
+        print("Chimera Kernel Cloned with The Required tools")
+    elif c_ask == "n":
+        tree(*chimera[0])
+        print("Chimera Kernel Cloned without the required tools")
     else:
-        print("Wrong Input ! enter the source name correctly!")
+        print("Incorrect input! Enter y or n only!")
 
 else:
     print("Wrong input! Enter what you want to clone correctly!")
